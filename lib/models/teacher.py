@@ -17,6 +17,7 @@ class Teacher:
     def name(self):
         return self._name
 
+
     @name.setter
     def name(self, name):
         if isinstance(name, str) and len(name):
@@ -25,6 +26,11 @@ class Teacher:
             raise ValueError(
                 "Name must be a non-empty string"
             )
+
+    def get_all(name):
+            return f"Hello, {name}!"
+    
+
 
 
 

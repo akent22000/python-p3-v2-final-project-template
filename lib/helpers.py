@@ -11,6 +11,11 @@ def exit_program():
     exit()
 
 def list_teachers():
-    teacher = Teacher.get_all()
-    for teacher in teacher:
-        print(teacher)
+    # teacher = Teacher.get_all(__name__)
+    # for i in teacher:
+    #     print(i)
+    #     # print(teacher)
+
+
+    message = Teacher.get_all(Teacher.name)
+    print(message)  # Output: Hello, World!
