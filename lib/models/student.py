@@ -1,0 +1,27 @@
+# lib/models/employee.py
+from __init__ import CURSOR, CONN
+from teacher import Teacher
+
+
+class Student:
+
+    # Dictionary of objects saved to the database.
+    all = {}
+
+    def __init__(self, name, id=None):
+        self.id = id
+        self.name = name
+
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise ValueError(
+                "Name must be a non-empty string"
+            )
