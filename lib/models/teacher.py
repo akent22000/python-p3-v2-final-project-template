@@ -2,6 +2,9 @@
 from __init__ import CURSOR, CONN
 
 
+
+
+
 class Teacher:
 
     # Dictionary of objects saved to the database.
@@ -10,8 +13,8 @@ class Teacher:
     def __init__(self, name):
         self.name = name
 
-    def __repr__(self):
-        return f"<Hi,{self.name}>"
+    # def __repr__(self):
+    #     return f"<Hi,{self.name}>"
 
     @property
     def name(self):
@@ -26,11 +29,10 @@ class Teacher:
             raise ValueError(
                 "Name must be a non-empty string"
             )
+    name = "Allen"
 
     def get_all(name):
             return f"Hello, {name}!"
-    
-
 
 
 
