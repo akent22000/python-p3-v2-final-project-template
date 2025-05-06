@@ -8,8 +8,8 @@ def exit_program():
 
 def list_teachers():
     teachers = Teacher.get_all()
-    for teacher in teachers:
-        print(teacher.id, teacher.name)
+    for i, teacher in enumerate(teachers, start=1):
+    		print(f"{i}. {teacher.name}")
 
 
 def find_teacher_by_name():
