@@ -1,5 +1,5 @@
 # lib/models/student.py
-from __init__ import CURSOR, CONN
+from models.__init__ import CURSOR, CONN
 from models.teacher import Teacher
 
 class Student:
@@ -7,15 +7,14 @@ class Student:
     # Dictionary of objects saved to the database.
     all = {}
 
-    def __init__(self, name, job_title, teacher_id, id=None):
+    def __init__(self, name, teacher_id, id=None):
         self.id = id
         self.name = name
-        self.job_title = job_title
         self.teacher_id = teacher_id
 
     def __repr__(self):
         return (
-            f"<Student {self.id}: {self.name}, {self.job_title}, " +
+            f"<Student {self.id}: {self.name} " +
             f"Teacher ID: {self.teacher_id}>"
         )
 
@@ -33,19 +32,6 @@ class Student:
             )
 
     @property
-    def job_title(self):
-        return self._job_title
-
-    @job_title.setter
-    def job_title(self, job_title):
-        if isinstance(job_title, str) and len(job_title):
-            self._job_title = job_title
-        else:
-            raise ValueError(
-                "job_title must be a non-empty string"
-            )
-
-    @property
     def teacher_id(self):
         return self._teacher_id
 
@@ -57,6 +43,19 @@ class Student:
             raise ValueError(
                 "teacher_id must reference a teacher in the database")
 
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing one Student object per table row"""
+        sql = """
+            SELECT *
+            FROM students
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Student instances """
@@ -64,9 +63,8 @@ class Student:
             CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
             name TEXT,
-            job_title TEXT,
             teacher_id INTEGER,
-            FOREIGN KEY (teacher_id) REFERENCES teacher(id))
+            FOREIGN KEY (teacher_id) REFERENCES teachers(id))
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -80,16 +78,15 @@ class Student:
         CURSOR.execute(sql)
         CONN.commit()
 
+
+
     def save(self):
-        """ Insert a new row with the name, job title, and teacher id values of the current Student object.
-        Update object id attribute using the primary key value of new row.
-        Save the object in local dictionary using table row's PK as dictionary key"""
         sql = """
-                INSERT INTO students (name, job_title, teacher_id)
-                VALUES (?, ?, ?)
+                INSERT INTO students (name, teacher_id)
+                VALUES (?, ?)
         """
 
-        CURSOR.execute(sql, (self.name, self.job_title, self.teacher_id))
+        CURSOR.execute(sql, (self.name, self.teacher_id,))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
@@ -99,11 +96,10 @@ class Student:
         """Update the table row corresponding to the current Student instance."""
         sql = """
             UPDATE students
-            SET name = ?, job_title = ?, teacher_id = ?
+            SET name = ?, teacher_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.job_title,
-                             self.teacher_id, self.id))
+        CURSOR.execute(sql, (self.name, self.teacher_id, self.id))
         CONN.commit()
 
     def delete(self):
@@ -125,9 +121,9 @@ class Student:
         self.id = None
 
     @classmethod
-    def create(cls, name, job_title, teacher_id):
+    def create(cls, name, teacher_id):
         """ Initialize a new Student instance and save the object to the database """
-        student = cls(name, job_title, teacher_id)
+        student = cls(name, teacher_id)
         student.save()
         return student
 
@@ -140,26 +136,14 @@ class Student:
         if student:
             # ensure attributes match row values in case local instance was modified
             student.name = row[1]
-            student.job_title = row[2]
-            student.teacher_id = row[3]
+            student.teacher_id = row[2]
         else:
             # not in dictionary, create new instance and add to dictionary
-            student = cls(row[1], row[2], row[3])
+            student = cls(row[1], row[2])
             student.id = row[0]
             cls.all[student.id] = student
         return student
 
-    @classmethod
-    def get_all(cls):
-        """Return a list containing one Student object per table row"""
-        sql = """
-            SELECT *
-            FROM students
-        """
-
-        rows = CURSOR.execute(sql).fetchall()
-
-        return [cls.instance_from_db(row) for row in rows]
 
     @classmethod
     def find_by_id(cls, id):
@@ -184,7 +168,3 @@ class Student:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
-
-    def reviews(self):
-        """Return list of reviews associated with current student"""
-        pass

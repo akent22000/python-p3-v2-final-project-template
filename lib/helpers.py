@@ -9,7 +9,7 @@ def exit_program():
 def list_teachers():
     teachers = Teacher.get_all()
     for teacher in teachers:
-        print(teacher)
+        print(teacher.id, teacher.name)
 
 
 def find_teacher_by_name():
@@ -23,7 +23,7 @@ def find_teacher_by_id():
     #use a trailing underscore not to override the built-in id function
     id_ = input("Enter the teacher's id: ")
     teacher = Teacher.find_by_id(id_)
-    print(teacher) if teacher else print(f'Teacher {id_} not found')
+    print(teacher.id, teacher.name) if teacher else print(f'Teacher {id_} not found')
 
 
 def create_teacher():
@@ -42,7 +42,6 @@ def update_teacher():
             name = input("Enter the teacher's new name: ")
             teacher.name = name
 
-
             teacher.update()
             print(f'Success: {teacher}')
         except Exception as exc:
@@ -60,13 +59,11 @@ def delete_teacher():
         print(f'Teacher {id_} not found')
 
 
-# You'll implement the student functions in the lab
 
 def list_students():
-    student = Student.get_all()
-    for student in student:
-        print(student)
-
+    students = Student.get_all()
+    for student in students:
+        print(student.name)
 
 def find_student_by_name():
     name = input("Enter the teacher's name: ")
@@ -84,8 +81,10 @@ def find_student_by_id():
 
 def create_student():
     name = input("Enter the student's name: ")
+    teacher=input("Enter the student's teacher: ")
     try:
         student = Student.create(name)
+        teacher = Teacher.create(name)
         print(f'Success: {student}')
     except Exception as exc:
         print("Error creating student: ", exc)
@@ -103,7 +102,7 @@ def update_student():
         except Exception as exc:
             print("Error updating student: ", exc)
     else:
-        print(f'Dmployee {id_} not found')
+        print(f'Student {id_} not found')
 
 
 def delete_student():
@@ -116,5 +115,16 @@ def delete_student():
 
 
 def list_teacher_students():
-    pass
+    teacher_id = input("Enter teacher ID: ")
+    teacher = Teacher.find_by_id(int(float)(teacher_id))
+    if teacher:
+        students = teacher.students()
+        if students:
+            print(f"students in teacher {teacher.name}:")
+            for student in students:
+                print(f"student ID: {student.id}, Name: {student.name}")
+        else:
+            print(f"No employees found in teacher {teacher.name}.")
+    else:
+        print(f"teacher with ID {teacher_id} not found in the database.")
 
