@@ -27,7 +27,6 @@ class Teacher:
                 "Name must be a non-empty string"
             )
 
-
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Teacher instances """
@@ -56,7 +55,7 @@ class Teacher:
         """
         
         # breakpoint()
-        CURSOR.execute(sql, (self.name,))
+        CURSOR.execute(sql, (self.name))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
@@ -76,7 +75,7 @@ class Teacher:
         """Update the table row corresponding to the current Teacher instance."""
         sql = """
             UPDATE teachers
-            SET name = ?, 
+            SET name = ?
             WHERE id = ?
         """
         CURSOR.execute(sql, (self.name, self.id))
@@ -88,7 +87,7 @@ class Teacher:
 
         sql = """
             DELETE FROM teachers
-            WHERE id = ?
+            WHERE id = ?;
         """
 
         CURSOR.execute(sql, (self.id,))
@@ -134,7 +133,7 @@ class Teacher:
         sql = """
             SELECT *
             FROM teachers
-            WHERE id = ?
+            WHERE id = ?;
         """
 
         row = CURSOR.execute(sql, (id,)).fetchone()
@@ -146,7 +145,7 @@ class Teacher:
         sql = """
             SELECT *
             FROM teachers
-            WHERE name is ?
+            WHERE name is ?;
         """
 
         row = CURSOR.execute(sql, (name,)).fetchone()
