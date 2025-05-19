@@ -55,13 +55,12 @@ class Teacher:
         """
         
         # breakpoint()
-        CURSOR.execute(sql, (self.name))
+        CURSOR.execute(sql, (self.name,))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
-        print(self, sql)
-
+        
 
     @classmethod
     def create(cls, name):
