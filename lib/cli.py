@@ -25,36 +25,55 @@ def teacher():
             exit_program()
         elif choice == "T" or choice == "t":
             list_teachers()
-            details_sub()
+            teacher_details_sub()
         elif choice.lower != "E" or choice !="e":
             print("invaild")
     exit_program()
 
-def details_sub():
+def teacher_details_sub():
+    choice = ""
+    while choice.lower != "e":
         print("\nEnter E to exit or")
         print("\nS to see a teacher's details")
         print("A to add a teacher")
-        print("U to update a teacher")
-        print("D to delete a teacher")
-        print("B to go back")
+        # print("U to update a teacher")
+        # print("D to delete a teacher")
+        # print("B to go back")
         choice = input("> ")
         if choice.lower == "E" or choice == "e":
             exit_program()
         elif choice == "S" or choice == "s":
             list_teacher_students()
-            add_students()
+            student_details_sub()
+        # elif choice == "A" or choice == "a":
+        #     add_teachers()
+        # elif choice == "U" or choice == "u":
+        #     update_teachers()
+        # elif choice == "D" or choice == "d":
+        #     delete_teachers()
+        # elif choice == "B" or choice == "b":
+        #     teacher()
+        elif choice.lower != "E" or choice !="e":
+            print("invaild")
+    exit_program()
+
+def student_details_sub():
+    choice = ""
+    while choice.lower != "e":
+        print("\nEnter E to exit or")
+        print("A to add a student")
+        print("B to go back")
+
+        choice = input("> ")
+        if choice.lower == "E" or choice == "e":
+            exit_program()
         elif choice == "A" or choice == "a":
-            add_teachers()
-        elif choice == "U" or choice == "u":
-            update_teachers()
-        elif choice == "D" or choice == "d":
-            delete_teachers()
+            add_students()
         elif choice == "B" or choice == "b":
             teacher()
         elif choice.lower != "E" or choice !="e":
-            exit_program()
-
-
+            print("invaild")
+    exit_program()
 
 
 

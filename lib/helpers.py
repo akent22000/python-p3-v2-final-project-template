@@ -48,13 +48,19 @@ def add_teachers():
     except Exception as exc:
         print("Error created teacher", exc)
 
-## Error creating student:  teacher_id must reference a teacher in the database
-def add_students(teacher):
-    name = input("Enter the student's name: ")
-    student = Student.create(name, teacher.id)
-    print(f'Success: {student}')
 
+def add_students():
+    choice = input("Enter the number of the teacher to see their students: ")
 
+    teachers = Teacher.get_all()
+    teacher = teachers[int(choice)-1]
+    name = input("\nPlease enter task name: ")
+    try:
+        Student.create(name, teacher.id)
+        print("\nTask succesfully added")
+    except Exception as exc:
+        print("\nError creating new task", exc)
+         
 
 # working
 def update_teachers():
@@ -88,3 +94,31 @@ def delete_teachers():
 
 
 
+
+
+
+
+
+
+
+
+
+## Error creating student:  teacher_id must reference a teacher in the database
+# def add_students(teacher.id=None):
+#     name = input("Enter the student's name: ")
+#     student = Student.create(name, (teacher.id))
+#     print(f'Success: {student}')
+
+
+# def add_students():
+#     name = input("Enter the student's name: ")
+
+#     teachers = Teacher.get_all()
+#     teacher = teacher[int(name)-1]
+#     # person = Person.find_by_id((int(choice)-1))
+#     student = input("\nPlease enter task name: ")
+#     try:
+#         Student.create(student,name, teacher.id)
+#         print("\nTask succesfully added")
+#     except Exception as exc:
+#         print("\nError creating new task", exc)
