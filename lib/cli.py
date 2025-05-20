@@ -5,13 +5,14 @@ from helpers import (
     list_teachers,
     add_teachers,
     add_students,
+    update_teachers,
     delete_teachers,
     list_teacher_students,
     fancy_menu,
 )
 
 
-def teacher():
+def teacher_main():
     choice = ""
     while choice.lower != "e":
         print("\nWelcome to the Wonder School!")
@@ -27,12 +28,14 @@ def teacher():
             teacher_details_sub()
     exit_program()
 
+
 def teacher_details_sub():
     choice = ""
     while choice.lower != "e":
         fancy_menu()      
         print("\nEnter S to see a teacher's details")
         print("A to add a teacher")
+        print("U to update a teacher")
         print("D to delete a teacher")
         print("B to go back")
         print("\nOr E to exit")
@@ -42,17 +45,20 @@ def teacher_details_sub():
         if choice.lower == "E" or choice == "e":
             exit_program()
         elif choice == "S" or choice == "s":
-            list_teacher_students()
-            student_details_sub()
+            teacher = list_teacher_students()
+            student_details_sub(teacher)
         elif choice == "A" or choice == "a":
             add_teachers()
+        elif choice == "U" or choice == "u":
+            update_teachers()
         elif choice == "D" or choice == "d":
             delete_teachers()
         elif choice == "B" or choice == "b":
-            teacher()
+            teacher_main()
     exit_program()
 
-def student_details_sub():
+
+def student_details_sub(teacher):
     choice = ""
     while choice.lower != "e":
         print("\nEnter A to add a student")
@@ -63,9 +69,9 @@ def student_details_sub():
         if choice.lower == "E" or choice == "e":
             exit_program()
         elif choice == "A" or choice == "a":
-            add_students()
+            add_students(teacher)
         elif choice == "B" or choice == "b":
-            teacher()
+            teacher_details_sub()
     exit_program()
 
 
@@ -74,4 +80,4 @@ def menu():
 
 
 if __name__ == "__main__":
-    teacher()
+    teacher_main()

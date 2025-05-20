@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project assists schools in managing their teachers and students' databases. Functionality within the Command-Line Interface menu includes:
+This project assists schools in managing the databases of teachers and students. Functionality within the Command-Line Interface menu includes:
 -listing all teachers,
 -listing all students within a teacher's classroom,
 -adding and removing teachers
