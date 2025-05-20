@@ -7,6 +7,7 @@ from helpers import (
     add_students,
     update_teachers,
     delete_teachers,
+    delete_students,
     list_teacher_students,
     fancy_menu,
 )
@@ -62,6 +63,7 @@ def student_details_sub(teacher):
     choice = ""
     while choice.lower != "e":
         print("\nEnter A to add a student")
+        print("\nEnter D to delete a student")
         print("B to go back")
         print("\nOr E to exit")
 
@@ -70,6 +72,8 @@ def student_details_sub(teacher):
             exit_program()
         elif choice == "A" or choice == "a":
             add_students(teacher)
+        elif choice == "D" or choice == "d":
+            delete_students()
         elif choice == "B" or choice == "b":
             teacher_details_sub()
     exit_program()
