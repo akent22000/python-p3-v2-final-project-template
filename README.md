@@ -55,8 +55,9 @@ open the project and run to install the required dependencies
     If you selected S the following menu is displayed:
 
         1. A to add a student
-        2. B to go back to the previous menu
-        3. E to exit the program
+        2. D to delete a student
+        3. B to go back to the previous menu
+        4. E to exit the program
 
     1. A - select to add a new student, you will be prompted to enter the student's name.
     3. D - select this to delete a student, you will be prompted to enter the number of the student you want to remove from the list.

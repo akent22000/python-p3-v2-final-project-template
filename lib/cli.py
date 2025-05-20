@@ -38,8 +38,9 @@ def teacher_details_sub():
         print("A to add a teacher")
         print("U to update a teacher")
         print("D to delete a teacher")
-        print("B to go back")
-        print("\nOr E to exit")
+        print("B to go back to go back to the previous menu")
+        print("Or E to exit")
+        print("Or E to exit")
         fancy_menu()      
 
         choice = input("> ")
@@ -60,12 +61,15 @@ def teacher_details_sub():
 
 
 def student_details_sub(teacher):
+    fancy_menu()      
+
     choice = ""
     while choice.lower != "e":
         print("\nEnter A to add a student")
-        print("\nEnter D to delete a student")
-        print("B to go back")
-        print("\nOr E to exit")
+        print("D to delete a student")
+        print("B to go back to the previous menu")
+        print("Or E to exit")
+        fancy_menu()      
 
         choice = input("> ")
         if choice.lower == "E" or choice == "e":

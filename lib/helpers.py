@@ -33,7 +33,7 @@ def list_teacher_students():
         students = teacher.students()
 
         if students:
-            print(f"Students in {teacher.name} class :")
+            print(f"Student's in {teacher.name}'s class :")
             for i, student in enumerate(students, start=1):
                 print(f"{i}. {student.name}")
         else:
@@ -80,6 +80,7 @@ def delete_teachers():
             print(f"No students found in {teacher.name}'s class.")
     else:
         print(f"Teacher not found!")
+
 
 
 def delete_students():
