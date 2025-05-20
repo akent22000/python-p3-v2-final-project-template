@@ -6,6 +6,10 @@ def exit_program():
     print("Goodbye!")
     exit()
 
+def fancy_menu():
+     print("*********************************")
+
+
 # working
 def list_teachers():
     teachers = Teacher.get_all()
@@ -37,10 +41,9 @@ def list_teacher_students():
 
 
 
-## Error created teacher Incorrect number of bindings supplied. 
-## The current statement uses 1, and there are 3 supplied.
+
 def add_teachers():
-    name = input("Enter the teacher's name:")
+    name = input("Enter the teacher's name: ")
     try:
         teacher = Teacher.create(name)
         print(f"Yay! You created {teacher}!")
@@ -49,18 +52,31 @@ def add_teachers():
         print("Error created teacher", exc)
 
 
-def add_students():
-    choice = input("Enter the number of the teacher to see their students: ")
+def add_students(teacher):
+    name = input("Enter the student's name: ")
 
-    teachers = Teacher.get_all()
-    teacher = teachers[int(choice)-1]
-    name = input("\nPlease enter task name: ")
-    try:
-        Student.create(name, teacher.id)
-        print("\nTask succesfully added")
-    except Exception as exc:
-        print("\nError creating new task", exc)
+## Error creating student:  teacher_id must reference a teacher in the database
+# def add_students(teacher.id=None):
+#     name = input("Enter the student's name: ")
+#     student = Student.create(name, (teacher.id))
+#     print(f'Success: {student}')
+
+
+
+# # WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!
+# def add_students():
+#     choice = input("Enter the number of the teacher: ")
+
+#     teachers = Teacher.get_all()
+#     teacher = teachers[int(choice)-1]
+#     name = input("\nPlease enter student name: ")
+#     try:
+#         Student.create(name, teacher.id)
+#         print("\Student succesfully added")
+#     except Exception as exc:
+#         print("\nError creating new student", exc)
          
+
 
 # working
 def update_teachers():
@@ -94,31 +110,3 @@ def delete_teachers():
 
 
 
-
-
-
-
-
-
-
-
-
-## Error creating student:  teacher_id must reference a teacher in the database
-# def add_students(teacher.id=None):
-#     name = input("Enter the student's name: ")
-#     student = Student.create(name, (teacher.id))
-#     print(f'Success: {student}')
-
-
-# def add_students():
-#     name = input("Enter the student's name: ")
-
-#     teachers = Teacher.get_all()
-#     teacher = teacher[int(name)-1]
-#     # person = Person.find_by_id((int(choice)-1))
-#     student = input("\nPlease enter task name: ")
-#     try:
-#         Student.create(student,name, teacher.id)
-#         print("\nTask succesfully added")
-#     except Exception as exc:
-#         print("\nError creating new task", exc)

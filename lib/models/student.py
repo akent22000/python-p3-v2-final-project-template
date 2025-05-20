@@ -86,11 +86,12 @@ class Student:
                 VALUES (?, ?)
         """
 
-        CURSOR.execute(sql, (self.name, self.teacher_id,))
+        CURSOR.execute(sql, (self.name, self.teacher_id))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+        
 
     def update(self):
         """Update the table row corresponding to the current Student instance."""
@@ -129,7 +130,7 @@ class Student:
 
     @classmethod
     def instance_from_db(cls, row):
-        """Return an Student object having the attribute values from the table row."""
+        """Return a Student object having the attribute values from the table row."""
 
         # Check the dictionary for  existing instance using the row's primary key
         student = cls.all.get(row[0])
