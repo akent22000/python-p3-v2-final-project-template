@@ -14,19 +14,24 @@ class Teacher:
     def __repr__(self):
         return f"<Teacher ID:{self.id} Name: {self.name}>"
 
+#Used the property decorator to define the name property's getter method
     @property
     def name(self):
         return self._name
 
+#Used the property decorator to define the name property's setter method
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and len(name):
+        #if name is an istance of teacher then set validations
+        #LEN = LENGTH
+        if isinstance(name, str) and 1 <= len(name) <= 15:
             self._name = name
         else:
             raise ValueError(
-                "Name must be a non-empty string"
-            )
+                "Name must be a non-empty string")
 
+##############################################################
+#Class methods
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Teacher instances """
@@ -86,7 +91,7 @@ class Teacher:
 
         sql = """
             DELETE FROM teachers
-            WHERE id = ?;
+            WHERE id = ?
         """
 
         CURSOR.execute(sql, (self.id,))

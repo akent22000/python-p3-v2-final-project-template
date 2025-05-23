@@ -7,6 +7,8 @@ class Student:
     # Dictionary of objects saved to the database.
     all = {}
 
+#initialize a working copy of the student class
+#student must have name, teacher_id when created
     def __init__(self, name, teacher_id, id=None):
         self.id = id
         self.name = name
@@ -24,7 +26,7 @@ class Student:
 
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and len(name):
+        if isinstance(name, str) and 1 <= len(name) <= 15:
             self._name = name
         else:
             raise ValueError(
